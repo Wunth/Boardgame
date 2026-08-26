@@ -1,6 +1,7 @@
 import { useParams } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
 import { getBoardgameById } from '../apis/boardgames.ts'
+import { Link } from 'react-router'
 
 export default function Boardgame() {
   const { id } = useParams()
@@ -27,10 +28,33 @@ export default function Boardgame() {
   if (isError) {
     return <span>Error: {error.message}</span>
   }
-
   return (
     <div>
-      <h2>Boardgame: {boardgame.name}</h2>
+      <h2>{boardgame.name}</h2>
+      <p className="playerCount">Player count: {boardgame.playerCount}</p>
+      <p className="playTime">Play time: {boardgame.playTime}</p>
+      <p className="category">
+        Category: {boardgame.category ? boardgame.category : '(blank)'}
+      </p>
+      <p className="bggRating">BGG Rating: {boardgame.bggRating}</p>
+      <p className="personalRating">My rating: {boardgame.personalRating}</p>
+      <p className="status">Status: {boardgame.status}</p>
+      <p>
+        <a
+          href={`https://boardgamegeek.com/boardgame/${boardgame.bggObjectid}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          BGG link
+        </a>
+      </p>
+
+      <p>
+        <Link to={`/edit/${boardgame.id}`}>Edit this game</Link>
+      </p>
+      <p>
+        <Link to={'/'}>Back to list</Link>
+      </p>
     </div>
   )
 }

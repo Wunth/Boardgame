@@ -12,8 +12,9 @@ export function up(knex) {
     table.string('personal_rating')
     table.string('bgg_rating')
     table.string('status')
+    table.string('bgg_objectid')
   })
-};
+}
 
 /**
  * @param { import("knex").Knex } knex
@@ -21,4 +22,4 @@ export function up(knex) {
  */
 export function down(knex) {
   return knex.schema.dropTableIfExists('boardgames')
-};
+}

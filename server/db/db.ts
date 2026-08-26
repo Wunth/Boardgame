@@ -4,12 +4,13 @@ import db from './connection'
 const columns = [
   'id',
   'name',
-  'player_count',
-  'play_time',
+  'player_count as playerCount',
+  'play_time as playTime',
   'category',
-  'bgg_rating',
-  'personal_rating',
+  'bgg_rating as bggRating',
+  'personal_rating as personalRating',
   'status',
+  'bgg_objectid as bggObjectid',
 ]
 
 // get all games from database
@@ -44,10 +45,11 @@ export async function addBoardgame(data: BoardgameData) {
       name: data.name,
       player_count: data.playerCount,
       play_time: data.playTime,
-      category: data.playTime,
+      category: data.category,
       bgg_rating: data.bggRating,
       personal_rating: data.personalRating,
       status: data.status,
+      bgg_objectid: data.bggObjectid,
     })
     .returning(columns)
 
@@ -81,6 +83,7 @@ export async function updateBoardgame(
       personal_rating: data.personalRating,
       bgg_rating: data.bggRating,
       status: data.status,
+      bgg_objectid: data.bggObjectid,
     })
     .returning(columns)
 

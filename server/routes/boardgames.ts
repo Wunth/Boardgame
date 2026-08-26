@@ -65,6 +65,7 @@ router.delete('/:id', async (req, res) => {
 //     "personalRating": "",
 //     "bggRating": "6.89",
 //     "status": "owned (for trade)"
+//     "bgg_objectid": "",
 // }
 router.post('/', async (req, res) => {
   try {
@@ -82,5 +83,22 @@ router.post('/', async (req, res) => {
 })
 
 // PATCH
-
+router.patch('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    if (!id) {
+      console.error(id + ' is an invalid id')
+      return res.status(400).send('Bad request')
+    }
+    const boardgame = await db.updateBoardgame(id, req.body)
+    res.json(boardgame)
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error(error)
+    }
+    res.status(500).send('Something went wrong')
+  }
+})
 export default router

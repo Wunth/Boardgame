@@ -1,4 +1,5 @@
-export interface BoardgameData {  // BEFORE it's in the DB — no id yet
+export interface BoardgameData {
+  // BEFORE it's in the DB — no id yet
   name: string
   playerCount: string
   playTime: string
@@ -6,8 +7,10 @@ export interface BoardgameData {  // BEFORE it's in the DB — no id yet
   bggRating: string
   personalRating: string
   status: string
+  bggObjectid: string
 }
 
-export interface Boardgame extends BoardgameData {   // FROM the DB — has an id
+export interface Boardgame extends BoardgameData {
+  // FROM the DB — has an id
   id: number
 }

@@ -24,3 +24,9 @@ export async function createBoardgame(data: BoardgameData) {
 export async function deleteBoardgame(id: number) {
   await request.delete(`${rootURL}/boardgames/${id}`)
 }
+
+// UPDATE
+export async function updateBoardgame(id: number, data: BoardgameData) {
+  const response = await request.patch(`${rootURL}/boardgames/${id}`).send(data)
+  return response.body as Boardgame
+}
