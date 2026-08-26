@@ -6,6 +6,9 @@ const server = express()
 server.use(express.json())
 
 // ADD YOUR API ROUTES HERE
+import boardgamesRouter from './routes/boardgames.ts'
+
+server.use('/api/v1/boardgames', boardgamesRouter)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
