@@ -29,16 +29,28 @@ export default function BoardgameForm({
     bggObjectid,
   })
 
+  /*
+  // to do: add a function to extract the bgg id from the url
+  function extractBGGId(input: string): string {
+    const trimmed = input.trim()
+    if (!trimmed) return ''
+    const bggid = trimmed.split("/boardgame/")
+    return ''
+  }
+*/
+
   const handleChange = (
     evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, type, value } = evt.target
+    // to do: incclude the option to convert the bgg link to bgg id
+    // const { name, type, value: rawValue } = evt.target
+    // const value = name === 'BGGLink' ? extractBGGId(rawValue) : rawValue
     setFormState((prev) => ({
       ...prev,
       [name]: type === 'number' ? Number(value) : value,
     }))
   }
-
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
     onSubmit(formState)
@@ -130,6 +142,21 @@ export default function BoardgameForm({
           />
         </label>
       </p>
+      {/*
+     // to do: add a field to add the bgg link
+      <p>
+        <label>
+          boardgamegeek.com link
+          <br />
+          <input
+            type="text"
+            name="BGGLink"
+            value={formState.status}
+            onChange={handleChange}
+          />
+        </label>
+      </p>
+      */}
       <button type="submit">{submitLabel}</button>
     </form>
   )
