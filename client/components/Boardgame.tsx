@@ -36,7 +36,9 @@ export default function Boardgame() {
       <p className="category">
         Category: {boardgame.category ? boardgame.category : '(blank)'}
       </p>
-      <p className="bggRating">BGG Rating: {boardgame.bggRating}</p>
+      <p className="bggRating">
+        BGG Rating: {Math.round(Number(boardgame.bggRating) * 10) / 10}
+      </p>
       <p className="personalRating">My rating: {boardgame.personalRating}</p>
       <p className="status">Status: {boardgame.status}</p>
       <p>
