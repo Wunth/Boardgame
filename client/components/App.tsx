@@ -1,14 +1,15 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import GameBoard from './GameBoard'
+//import DistanceArea from './DistanceArea'
 
 function App() {
-  const { data } = useFruits()
-
+  /*
+  The standard dimension for a "Standard Euro" 
+  board game card is 59 × 92 mm, which gives an 
+  aspect ratio of approximately 1:1.56 (or roughly 59:92).
+  */
   return (
     <>
-      <div className="app">
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
-      </div>
+      <GameBoard />
     </>
   )
 }

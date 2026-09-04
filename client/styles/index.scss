@@ -1,6 +1,289 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
 
-html, 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
   font-family: 'Montserrat', sans-serif;
+}
+
+/* === Overall board layout === */
+
+#game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: auto auto auto;
+  align-items: start;
+}
+
+/* === All cards === */
+
+.environment-card {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+  height: 184px;
+  width: 118px;
+  margin: 2px;
+  border: 2px solid black;
+  border-radius: 8px;
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: #eee;
+}
+.environment-card .environ-colour {
+  width: 82px;
+  height: 148px;
+  border: 2px solid black;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  left: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1;
+  background-color: white;
+}
+.red .environ-colour {
+  border-color: red;
+  background-image: url('../assets/images/env-red.png');
+}
+.blue .environ-colour {
+  border-color: blue;
+  background-image: url('../assets/images/env-blue.png');
+}
+.yellow .environ-colour {
+  border-color: yellow;
+  background-image: url('../assets/images/env-yellow.png');
+}
+.white .environ-colour {
+  border-color: #ccc;
+  background-image: url('../assets/images/env-white.png');
+}
+.green .environ-colour {
+  border-color: green;
+  background-image: url('../assets/images/env-green.png');
+}
+.suit {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+.hearts .suit {
+  background-image: url('../assets/images/heart.png');
+}
+.spades .suit {
+  background-image: url('../assets/images/spade.png');
+}
+.diamonds .suit {
+  background-image: url('../assets/images/diamond.png');
+}
+.clubs .suit {
+  background-image: url('../assets/images/club.png');
+}
+.wild .suit {
+  background-image: url('../assets/images/wild.png');
+}
+
+/* === Buttons  === */
+#setup-buttons {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+/* === Distance cards === */
+
+#distance {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: fit-content;
+  border: 2px solid orange;
+  grid-column: 1;
+  grid-row: 2;
+}
+#draw-deck {
+  border: 1px solid red;
+  position: relative;
+  height: 200px;
+  width: 160px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+#draw-deck .environment-card {
+  position: absolute;
+}
+#distance-cards {
+  border: 1px solid green;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+}
+
+/* === Player cards === */
+#board-lower {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  border: 2px solid pink;
+  width: fit-content;
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#player-rows {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#far-row,
+#near-row,
+#hand-cards {
+  border: 1px solid blue;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* === Transmutation zone === */
+.suit-card {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position-y: 4px;
+}
+.suit-card.diamonds {
+  background-image: url('../assets/images/diamond.png');
+}
+.suit-card.spades {
+  background-image: url('../assets/images/spade.png');
+}
+.suit-card.clubs {
+  background-image: url('../assets/images/club.png');
+}
+.suit-card.hearts {
+  background-image: url('../assets/images/heart.png');
+}
+
+#transmutation-zone {
+  grid-column: 2;
+  grid-row: 2 / 4;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: auto auto auto;
+  align-items: start;
+  gap: 16px;
+  width: fit-content;
+}
+#recipe-slot-markers {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  gap: 4px;
+}
+.recipe-marker{
+  width: 118px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #ccc;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.recipe-marker.red {
+  background-image: url('../assets/images/stone-red.png');
+  border: 2px solid red;
+}
+.recipe-marker.blue {
+  background-image: url('../assets/images/stone-blue.png');
+  border: 2px solid blue;
+}
+.recipe-marker.green {
+  background-image: url('../assets/images/stone-green.png');
+  border: 2px solid green;
+}
+.recipe-marker.yellow {
+  background-image: url('../assets/images/stone-yellow.png');
+  border: 2px solid yellow;
+}
+.recipe-marker.white {
+  background-image: url('../assets/images/stone-white.png');
+  border: 2px solid white;
+}
+
+
+#recipe-deck {
+  grid-column: 1;
+  grid-row: 2;
+  border: 1px solid red;
+  position: relative;
+  height: 220px;
+  width: 160px;
+  overflow: hidden;
+}
+#recipe-deck .recipe-card {
+  position: absolute;
+}
+
+#recipe-cards {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+.recipe-card {
+  width: 118px;
+  height: 118px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #eee;
+}
+
+#suit-cards {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.suit-entry {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+.suit-card {
+  width: 118px;
+  height: 118px;
+  flex-shrink: 0;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #eee;
+}
+.token-slot {
+  flex: 1;
+  min-width: 118px;
+  border: 1px dashed #999;
+  border-radius: 8px;
 }
