@@ -53,6 +53,17 @@ export default function BoardgameForm({
   }
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault()
+    // handle empty fields
+    const dataToSubmit = { ...formState }
+    if (!dataToSubmit.category) {
+      dataToSubmit.category = 'n/a'
+    }
+    if (!dataToSubmit.status) {
+      dataToSubmit.status = 'n/a'
+    }
+    if (!dataToSubmit.bggObjectid) {
+      dataToSubmit.bggObjectid = 'n/a'
+    }
     onSubmit(formState)
   }
 
@@ -67,6 +78,7 @@ export default function BoardgameForm({
             name="name"
             value={formState.name}
             onChange={handleChange}
+            required
           />
         </label>
       </p>
