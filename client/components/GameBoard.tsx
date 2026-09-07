@@ -1,4 +1,5 @@
 import { useEnvironmentCards } from '../hooks/useEnvironmentCards.ts'
+import { useRecipeCards } from '../hooks/useRecipeCards.ts'
 import CardZone from './CardZone.tsx'
 
 function GameBoard() {
@@ -8,11 +9,17 @@ function GameBoard() {
     playerFarRow,
     playerNearRow,
     playerHand,
-    //drawCard,
     dealStartingCards,
     dealToFarRow,
     startOver,
   } = useEnvironmentCards()
+
+  const {
+    recipeDeck,
+    recipeRow,
+    dealRecipeRow,
+    startOver: startOverRecipes, // to not conflict with GameBoard.startOver
+  } = useRecipeCards()
 
   // placholders
   const handlePlayAreaCardClick = (id: number) => {
@@ -30,11 +37,22 @@ function GameBoard() {
   const handleHandCardClick = (id: number) => {
     console.log('Near row card clicked', id)
   }
+  const handleRecipeDeckCardClick = (id: number) => {
+    console.log('recipe deck card clicked', id)
+  }
+  const handleRecipeCardClick = (id: number) => {
+    console.log('recipe card clicked', id)
+  }
+
+  const handleReset = () => {
+    startOver()
+    startOverRecipes()
+  }
 
   return (
     <div id="game-board">
       <div id="setup-buttons">
-        <button type="button" onClick={startOver}>
+        <button type="button" onClick={handleReset}>
           Reset
         </button>
         <br />
@@ -44,6 +62,9 @@ function GameBoard() {
         <br />
         <button type="button" onClick={dealToFarRow}>
           Deal player cards
+        </button>
+        <button type="button" onClick={dealRecipeRow}>
+          Deal recipe cards
         </button>
       </div>
 
@@ -68,6 +89,7 @@ function GameBoard() {
           onCardClick={handlePlayAreaCardClick}
         />
       </div>
+
       <div id="board-lower">
         <div id="player-rows">
           <CardZone
@@ -98,17 +120,45 @@ function GameBoard() {
         </div>
 
         <div id="recipe-deck">
-          <div className="recipe-card" />
-          <div className="recipe-card" />
-          <div className="recipe-card" />
+          {recipeDeck?.map((card, i) => {
+            const fromTop = (recipeDeck?.length ?? 1) - 1 - i
+            return (
+              <button
+                key={card.id}
+                type="button"
+                className="recipe-card"
+                onClick={() => handleRecipeDeckCardClick(card.id)}
+                style={{
+                  marginLeft: `${fromTop / 4}px`,
+                  marginTop: `${fromTop / 8}px`,
+                  zIndex: fromTop,
+                }}
+              >
+                <div className="recipe-card-gems">
+                  {card.gems.map((gem, gi) => (
+                    <span key={gi} className={gem} />
+                  ))}
+                </div>
+              </button>
+            )
+          })}
         </div>
 
         <div id="recipe-cards">
-          <div className="recipe-card" />
-          <div className="recipe-card" />
-          <div className="recipe-card" />
-          <div className="recipe-card" />
-          <div className="recipe-card" />
+          {recipeRow?.map((card) => (
+            <button
+              key={card.id}
+              type="button"
+              className="recipe-card"
+              onClick={() => handleRecipeCardClick(card.id)}
+            >
+              <div className="recipe-card-gems">
+                {card.gems.map((gem, gi) => (
+                  <span key={gi} className={gem} />
+                ))}
+              </div>
+            </button>
+          ))}
         </div>
 
         <div id="suit-cards">

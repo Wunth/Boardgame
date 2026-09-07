@@ -172,18 +172,23 @@ body {
   background-repeat: no-repeat;
   background-size: 100%;
   background-position-y: 4px;
+  background-color: black;
 }
 .suit-card.diamonds {
   background-image: url('../assets/images/diamond.png');
+  background-color: black;
 }
 .suit-card.spades {
   background-image: url('../assets/images/spade.png');
+  background-color: black;
 }
 .suit-card.clubs {
   background-image: url('../assets/images/club.png');
+  background-color: black;
 }
 .suit-card.hearts {
   background-image: url('../assets/images/heart.png');
+  background-color: black;
 }
 
 #transmutation-zone {
@@ -210,6 +215,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: black;
 }
 .recipe-marker.red {
   background-image: url('../assets/images/stone-red.png');
@@ -253,12 +259,42 @@ body {
   align-items: flex-start;
   gap: 4px;
 }
+
 .recipe-card {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+  box-sizing: border-box;
   width: 118px;
   height: 118px;
+  position: relative;
   border: 2px solid black;
   border-radius: 8px;
   background-color: #eee;
+}
+.recipe-card-gems span {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.recipe-card-gems .red {
+  background-image: url('../assets/images/stone-red.png');
+}
+.recipe-card-gems .blue {
+  background-image: url('../assets/images/stone-blue.png');
+}
+.recipe-card-gems .green {
+  background-image: url('../assets/images/stone-green.png');
+}
+.recipe-card-gems .white {
+  background-image: url('../assets/images/stone-white.png');
+}
+.recipe-card-gems .yellow {
+  background-image: url('../assets/images/stone-yellow.png');
 }
 
 #suit-cards {
