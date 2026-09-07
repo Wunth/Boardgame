@@ -52,7 +52,9 @@ export default function Boardgame() {
       </p>
 
       <p>
-        <Link to={`/edit/${boardgame.id}`}>Edit this game</Link>
+        <Link to={`/edit/${boardgame.id}`} className="btn">
+          Edit this game
+        </Link>
       </p>
       <p>
         <Link to={'/'}>Back to list</Link>

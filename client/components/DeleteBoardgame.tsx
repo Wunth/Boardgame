@@ -25,7 +25,9 @@ function DeleteBoardgame(props: Props) {
   return (
     <>
       <p>
-        <button onClick={() => handleClick()}>Delete</button>
+        <button onClick={() => handleClick()} className="btn">
+          Delete
+        </button>
       </p>
     </>
   )
