@@ -13,7 +13,7 @@ function BoardgameList() {
   if (isError) return <p>Error</p>
   return (
     <>
-      <button type="button" onClick={() => navigate('/add')}>
+      <button type="button" onClick={() => navigate('/add')} className="btn">
         Add a game to the collection
       </button>
 

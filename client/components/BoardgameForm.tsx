@@ -169,7 +169,9 @@ export default function BoardgameForm({
         </label>
       </p>
       */}
-      <button type="submit">{submitLabel}</button>
+      <button type="submit" className="btn">
+        {submitLabel}
+      </button>
     </form>
   )
 }
